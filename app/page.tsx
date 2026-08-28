@@ -113,7 +113,7 @@ export default function AltairLandingPage() {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <a href="/" className="flex items-center gap-3">
-              <img src="/logo.png" alt="Altair AI" className="h-12 md:h-16 w-auto object-contain" />
+              <img src="/logo.png" alt="Altair AI" className="h-16 md:h-20 w-auto object-contain" />
             </a>
 
             {/* Desktop Menu */}
@@ -383,7 +383,7 @@ export default function AltairLandingPage() {
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
               <a href="/" className="inline-block mb-4">
-                <img src="/logo.png" alt="Altair AI" className="h-14 md:h-18 w-auto object-contain" />
+                <img src="/logo.png" alt="Altair AI" className="h-16 md:h-24 w-auto object-contain" />
               </a>
               <p className="text-gray-300 leading-relaxed max-w-md font-[family-name:var(--font-jetbrains)] font-light text-sm">
                 Pioneering intelligent automation that transforms operations, amplifies human potential, and scales infinitely.
