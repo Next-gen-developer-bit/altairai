@@ -34,7 +34,7 @@ export default function AltairLandingPage() {
     // Fire Google Ads conversion event for "Book appointment"
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'conversion', {
-        'send_to': 'AW-18413669142/2OqzCOL68-gcEJaWqcxE',
+        'send_to': 'AW-18413669142/24_OCLDct-kcEJaWqcxE',
         'value': 1.0,
         'currency': 'INR'
       });
