@@ -3,6 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronRight, Brain, Zap, Bot, Workflow, Cog, Database, Boxes, Users, ArrowUpRight, Mail, Phone, MapPin, MessageCircleIcon, MessageCircleCodeIcon } from 'lucide-react';
 
+// Declare gtag on window for TypeScript
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 export default function AltairLandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -24,6 +31,14 @@ export default function AltairLandingPage() {
   };
 
   const handleContactClick = () => {
+    // Fire Google Ads conversion event for "Book appointment"
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-18413669142/2OqzCOL68-gcEJaWqcxE',
+        'value': 1.0,
+        'currency': 'INR'
+      });
+    }
     window.open('https://docs.google.com/forms/d/e/1FAIpQLSe-eoRAktiBjeLbdwTLO1Ik_zJMjcGED2o9vLe0k9Ji1-KLTQ/viewform?usp=header', '_blank');
   };
 
@@ -97,8 +112,8 @@ export default function AltairLandingPage() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-black/90 backdrop-blur-xl border-b border-white/10' : ''}`}>
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <a href="/" className="text-2xl font-bold text-white tracking-tight font-[family-name:var(--font-syne)]">
-              Altair AI
+            <a href="/" className="flex items-center gap-3">
+              <img src="/logo.png" alt="Altair AI" className="h-9 md:h-11 w-auto object-contain brightness-110" />
             </a>
 
             {/* Desktop Menu */}
@@ -154,7 +169,7 @@ export default function AltairLandingPage() {
               </span>
             </div>
           </div>
-          
+
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] font-[family-name:var(--font-syne)]">
             <span className="block mb-3 tracking-tight">Automate Everything</span>
             <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent tracking-tight">
@@ -167,14 +182,14 @@ export default function AltairLandingPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 font-[family-name:var(--font-jetbrains)]">
-            <button 
+            <button
               onClick={handleContactClick}
               className="group px-9 py-4 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full font-bold text-base hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 flex items-center gap-2 uppercase tracking-wider"
             >
               Start Automating
               <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button 
+            <button
               onClick={() => scrollToSection('services')}
               className="px-9 py-4 bg-white/5 backdrop-blur-sm border-2 border-white/30 rounded-full font-bold text-base hover:bg-white/10 hover:border-white/50 transition-all duration-300 uppercase tracking-wider"
             >
@@ -235,7 +250,7 @@ export default function AltairLandingPage() {
               <p className="text-base md:text-lg text-gray-300 leading-relaxed font-[family-name:var(--font-jetbrains)] font-light">
                 Our elite team of AI researchers, ML engineers, and automation specialists builds systems that don't just execute—they <strong className="text-cyan-400 font-semibold">understand</strong>, <strong className="text-purple-400 font-semibold">predict</strong>, and <strong className="text-pink-400 font-semibold">evolve</strong>.
               </p>
-              
+
               {/* Stats */}
               <div className="grid grid-cols-3 gap-4 pt-6">
                 {statsData.map((stat, index) => (
@@ -276,7 +291,7 @@ export default function AltairLandingPage() {
               >
                 {/* Hover gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`}></div>
-                
+
                 <div className="relative">
                   <div className="flex items-start justify-between mb-6">
                     <div className={`w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg`}>
@@ -286,11 +301,11 @@ export default function AltairLandingPage() {
                       {service.tag}
                     </span>
                   </div>
-                  
+
                   <h3 className="text-xl md:text-2xl font-bold mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300 font-[family-name:var(--font-syne)]">
                     {service.title}
                   </h3>
-                  
+
                   <p className="text-gray-300 leading-relaxed font-[family-name:var(--font-jetbrains)] font-light text-sm">
                     {service.description}
                   </p>
@@ -305,7 +320,7 @@ export default function AltairLandingPage() {
               <p className="text-base md:text-lg text-gray-300 mb-6 max-w-2xl font-[family-name:var(--font-jetbrains)] font-light">
                 Don't see exactly what you need? We specialize in <strong className="text-purple-400 font-semibold">custom automation solutions</strong> for unique challenges.
               </p>
-              <button 
+              <button
                 onClick={handleContactClick}
                 className="group px-8 py-4 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full font-bold uppercase tracking-wider hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 flex items-center gap-2 mx-auto font-[family-name:var(--font-jetbrains)]"
               >
@@ -329,7 +344,7 @@ export default function AltairLandingPage() {
             <p className="text-lg md:text-xl text-gray-300 mb-8 font-[family-name:var(--font-jetbrains)] font-light">
               Ready to <strong className="text-cyan-400 font-semibold">10x your efficiency</strong>? Connect with our automation experts.
             </p>
-            <button 
+            <button
               onClick={handleContactClick}
               className="group px-10 py-5 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 uppercase tracking-wider inline-flex items-center gap-2 font-[family-name:var(--font-jetbrains)]"
             >
@@ -367,8 +382,8 @@ export default function AltairLandingPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
-              <a href="/" className="inline-block mb-4 text-2xl font-bold text-white tracking-tight font-[family-name:var(--font-syne)]">
-                Altair AI
+              <a href="/" className="inline-block mb-4">
+                <img src="/logo.png" alt="Altair AI" className="h-9 md:h-10 w-auto object-contain brightness-110" />
               </a>
               <p className="text-gray-300 leading-relaxed max-w-md font-[family-name:var(--font-jetbrains)] font-light text-sm">
                 Pioneering intelligent automation that transforms operations, amplifies human potential, and scales infinitely.
@@ -401,22 +416,22 @@ export default function AltairLandingPage() {
               <div className="flex flex-wrap gap-3">
                 <a href="https://www.youtube.com/@PrakharAIAutomation" target="_blank" rel="noopener noreferrer" className="w-11 h-11 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center hover:bg-red-600 hover:border-red-600 hover:scale-110 transition-all duration-300" aria-label="YouTube">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                   </svg>
                 </a>
                 <a href="https://www.linkedin.com/company/altairaisolutions" target="_blank" rel="noopener noreferrer" className="w-11 h-11 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 hover:scale-110 transition-all duration-300" aria-label="LinkedIn">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                   </svg>
                 </a>
                 <a href="https://www.facebook.com/profile.php?id=100092880740003" target="_blank" rel="noopener noreferrer" className="w-11 h-11 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center hover:bg-blue-500 hover:border-blue-500 hover:scale-110 transition-all duration-300" aria-label="Facebook">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                   </svg>
                 </a>
                 <a href="https://x.com/AiEnthusiasticx" target="_blank" rel="noopener noreferrer" className="w-11 h-11 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center hover:bg-gray-700 hover:border-gray-700 hover:scale-110 transition-all duration-300" aria-label="X">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </a>
               </div>
@@ -430,19 +445,19 @@ export default function AltairLandingPage() {
               </p>
               <div className="flex gap-6 text-xs uppercase tracking-wider">
                 <a
-  href="/terms"
-  className="text-gray-400 hover:text-cyan-400 transition-colors"
->
-  Terms & Conditions
-</a>
+                  href="/terms"
+                  className="text-gray-400 hover:text-cyan-400 transition-colors"
+                >
+                  Terms & Conditions
+                </a>
 
                 <span className="text-gray-600">•</span>
                 <a
-  href="/privacy"
-  className="text-gray-400 hover:text-purple-400 transition-colors"
->
-  Privacy Policy
-</a>
+                  href="/privacy"
+                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  Privacy Policy
+                </a>
               </div>
             </div>
           </div>
